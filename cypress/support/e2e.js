@@ -13,10 +13,14 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
-import './commands'
 import 'cypress-mochawesome-reporter/register';
-//import 'cypress-mochawesome-reporter/cucumberSupport';
+import './commands';
+Cypress.on('uncaught:exception', (err) => {
+  // Ignora erros de chunk do webpack
+  if (err.message && err.message.includes('Loading chunk')) {
+    return false;
+  }
+});
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
